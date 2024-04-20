@@ -78,12 +78,6 @@ class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
     n_iter_ : int
         The actual number of iterations performed by the solver.
 
-    See Also
-    --------
-    Lasso : The Lasso is a linear model that estimates sparse coefficients
-        with l1 regularization.
-    HuberRegressor : Linear regression model that is robust to outliers.
-
     Examples
     --------
     >>> from sklearn.linear_model import QuantileRegressor
