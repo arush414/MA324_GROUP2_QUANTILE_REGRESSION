@@ -14,7 +14,22 @@ $$q_Y (\tau) = F^{-1}_Y(\tau) = \inf{\{y:F_Y(y)\geq\tau\}}$$
 where $F_Y(y)=P(Y \geq y)$ i.e. the cumulative distribution function.
 
 #### Linear Regression
-For a given dataset $(y_i,x_{i1},x_{i2},...,x_{ip})_{i=1}^n$ of n statistical units, a linear regression model assumes that the relationship between the dependent variable $y$ and the vector of regressors $x$ is linear.
+For a given dataset $\{y_i,x_{i1},x_{i2},...,x_{ip}\}_{i=1}^n $ of n statistical units, a linear regression model assumes that the relationship between the dependent variable $y$ and the vector of regressors $x$ is linear.
 i.e.
 $$Y = X\omega + \beta$$
-for some weights $\omega$.
+for some weights $\omega$ as slope and intercept $\beta$.
+
+## Quantile Regression
+As a linear model, QuantileRegression gives linear predictions $\hat{y}(\omega,X)=X\omega$ for the $q$-th quantile, $q \in (0,1)$. The weights or coefficients $\omega$ are then found by the following minimization problem:
+$$\min_{\omega} \frac{1}{n_{\text{samples}}}\sum_{i}PB_q(y_i-X_i\omega)+\alpha||\omega||_1$$
+
+Here, the loss consists of Pinball Loss PB (also called linear loss, optimal for quantiles) and L1 penalty controlled by parameter $\alpha$. The formula for the loss is:
+
+$$
+PB_q(t) = q\max(t,0)+(1-q)\max(-t,0)=t(q-1_{t<0})
+$$
+
+As the pinball loss is only linear in the residuals, quantile regression is much more robust to outliers than squared error based estimation of the mean.
+The use of Pinball Loss for quantile regression is industry standard. The proof of optimality can be cross-verified in the following papers:
+- https://doi.org/10.1016/j.ijforecast.2009.12.015
+- https://arxiv.org/pdf/1102.2101.pdf
