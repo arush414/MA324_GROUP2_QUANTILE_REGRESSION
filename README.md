@@ -33,3 +33,32 @@ As the pinball loss is only linear in the residuals, quantile regression is much
 The use of Pinball Loss for quantile regression is industry standard. The proof of optimality can be cross-verified in the following papers:
 - https://doi.org/10.1016/j.ijforecast.2009.12.015
 - https://arxiv.org/pdf/1102.2101.pdf
+
+The weights for the quantile regression equation are obtained by solving a linear programming problem formulated by using the above loss function as the target sum to be minimized, subject to constraints $y=X\omega$ where the equations represent the observed dataset.
+
+###### Multiple Quantiles simultaneous prediction
+We can extend the linear programming problem to higher dimensions since the equations are linearly independent and the loss is linear. By taking the linear combination of the contraints and the target sum, we can create a larger linear programming problem that simultaneous solves for multiple quantiles since the weights for the quantiles form indpendent equations and do not affect each other.
+
+### Quantile Decision Trees and Regression Forests
+It is straightforward to extend a standard decision tree to provide predictions at percentiles. When a decision tree is fit, store not only the sufficient statistics of the target at the leaf node such as the mean and variance but also all the target values in the leaf node. At prediction, these are used to compute empirical quantile estimates. \
+To estimate $F(Y=y|x)=q$ each target in value in $y$ is given a weight. Formally the weight given is
+$$l_j=\frac{1}{T}\sum_{t=1}^T\frac{1(y_j\in L(x))}{\sum_i 1(y_i\in L(x))}$$ for leaf $L(x)$
+We first find the leaf that it falls into at each tree. Then for each pair in the training data, if it is in the same leaf as the new sample, then the weight is the fraction of samples in the same leaf otherwise, zero.
+
+## Application
+Quantile regression is employed when the assumptions of constant variance in residuals and linearity between the independent and dependent variables, which are essential for linear regression, are violated. Additionally, quantile regression is preferred when the data exhibit heteroscedasticity or when the relationship between the variables is non-linear. By estimating different quantiles of the response variable's distribution, quantile regression offers a more comprehensive understanding of the data, especially in scenarios where linear regression assumptions fail to hold. \
+We apply Quantile Regression on housing dataset and list down our observations and results in this project.
+
+#### Pros and Cons
+
+###### Pros :
+- Robustness: Quantile regression is robust to outliers and does not assume that the data are normally distributed.
+- Flexibility: It allows for the estimation of different quantiles of the response variable's distribution, providing a more comprehensive understanding of the data.
+- Handles Heteroscedasticity: Quantile regression is suitable for datasets with heteroscedasticity, where the variance of the residuals is not constant across the range of predictor variables.
+- Non-linear Relationships: Unlike linear regression, quantile regression can model non-linear relationships between the independent and dependent variables.
+- Distributional Insights: It provides insights into different parts of the response variable's distribution, offering a more nuanced analysis of the data.
+###### Cons :
+- Computational Complexity: Estimating multiple quantiles can increase computational complexity, especially for large datasets.
+- Interpretation Challenges: Interpretation of the results can be more complex compared to linear regression, especially when estimating multiple quantiles.
+- Requirement of Larger Sample Sizes: Quantile regression may require larger sample sizes compared to linear regression to obtain reliable estimates, especially for extreme quantiles.
+- Limited Software Support: While many statistical software packages support linear regression, support for quantile regression may be limited, making implementation more challenging.
