@@ -64,5 +64,5 @@ We apply Quantile Regression on housing dataset and list down our observations a
 - Limited Software Support: While many statistical software packages support linear regression, support for quantile regression may be limited, making implementation more challenging.
 
 #### Setup
-To run this cod, make sure you have the necessary dependencies installed by using 
+To run this code, make sure you have the necessary dependencies installed by using \
 `pip install -r requirements.txt`
