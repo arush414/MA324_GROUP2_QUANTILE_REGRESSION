@@ -62,3 +62,7 @@ We apply Quantile Regression on housing dataset and list down our observations a
 - Interpretation Challenges: Interpretation of the results can be more complex compared to linear regression, especially when estimating multiple quantiles.
 - Requirement of Larger Sample Sizes: Quantile regression may require larger sample sizes compared to linear regression to obtain reliable estimates, especially for extreme quantiles.
 - Limited Software Support: While many statistical software packages support linear regression, support for quantile regression may be limited, making implementation more challenging.
+
+#### Setup
+To run this cod, make sure you have the necessary dependencies installed by using 
+`pip install -r requirements.txt`
