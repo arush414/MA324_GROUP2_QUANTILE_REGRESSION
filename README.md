@@ -45,6 +45,14 @@ To estimate $F(Y=y|x)=q$ each target in value in $y$ is given a weight. Formally
 $$l_j=\frac{1}{T}\sum_{t=1}^T\frac{1(y_j\in L(x))}{\sum_i 1(y_i\in L(x))}$$ for leaf $L(x)$
 We first find the leaf that it falls into at each tree. Then for each pair in the training data, if it is in the same leaf as the new sample, then the weight is the fraction of samples in the same leaf otherwise, zero.
 
+## Sima Module
+We also have added the sima module , from which we can import modified sklearn and quantile forest . From the modified sklearn we can predict multiple quantiles at the same time.
+To use modified sklearn from this module import modified sklearn from sima module.
+To initialize the Quantile Regressor , just provide it with list of quantiles that you want the model to predict along with alpha value for regularisation.
+model = QuantileRegressor(quantile=quantile,alpha=0) % Here you can give list of quantiles that you want instead of a single quantile for eg [0.3,0.5,0.9]
+model.fit(X_train, y_train)
+
+.
 ## Application
 Quantile regression is employed when the assumptions of constant variance in residuals and linearity between the independent and dependent variables, which are essential for linear regression, are violated. Additionally, quantile regression is preferred when the data exhibit heteroscedasticity or when the relationship between the variables is non-linear. By estimating different quantiles of the response variable's distribution, quantile regression offers a more comprehensive understanding of the data, especially in scenarios where linear regression assumptions fail to hold. \
 We apply Quantile Regression on housing dataset and list down our observations and results in this project.
