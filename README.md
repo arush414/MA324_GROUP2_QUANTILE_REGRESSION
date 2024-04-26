@@ -36,8 +36,8 @@ The use of Pinball Loss for quantile regression is industry standard. The proof 
 
 The weights for the quantile regression equation are obtained by solving a linear programming problem formulated by using the above loss function as the target sum to be minimized, subject to constraints $y=X\omega$ where the equations represent the observed dataset.
 
-###### Multiple Quantiles simultaneous prediction
-We can extend the linear programming problem to higher dimensions since the equations are linearly independent and the loss is linear. By taking the linear combination of the contraints and the target sum, we can create a larger linear programming problem that simultaneous solves for multiple quantiles since the weights for the quantiles form indpendent equations and do not affect each other.
+#### Multiple Quantiles simultaneous prediction
+We can extend the linear programming problem to higher dimensions since the equations are linearly independent and the loss is linear. By taking the linear combination of the contraints and the target sum, we can create a larger linear programming problem that simultaneously solves for multiple quantiles since the weights for the quantiles form indpendent equations and do not affect each other. 
 
 ### Quantile Decision Trees and Regression Forests
 It is straightforward to extend a standard decision tree to provide predictions at percentiles. When a decision tree is fit, store not only the sufficient statistics of the target at the leaf node such as the mean and variance but also all the target values in the leaf node. At prediction, these are used to compute empirical quantile estimates. \
@@ -46,7 +46,7 @@ $$l_j=\frac{1}{T}\sum_{t=1}^T\frac{1(y_j\in L(x))}{\sum_i 1(y_i\in L(x))}$$ for 
 We first find the leaf that it falls into at each tree. Then for each pair in the training data, if it is in the same leaf as the new sample, then the weight is the fraction of samples in the same leaf otherwise, zero.
 
 ## Sima Module
-We also have added the sima module , from which we can import modified sklearn and quantile forest . From the modified sklearn we can predict multiple quantiles at the same time.
+We have added a new module called sima module, which includes two libraries - modified sklearn and quantile forest. Modified sklearn implements simultaneous multiple quantile regression which wasn't possible using the original sklearn library.
 To use modified sklearn from this module import modified sklearn from sima module.
 To initialize the Quantile Regressor , just provide it with list of quantiles that you want the model to predict along with alpha value for regularisation.
 model = QuantileRegressor(quantile=quantile,alpha=0) % Here you can give list of quantiles that you want instead of a single quantile for eg [0.3,0.5,0.9]
